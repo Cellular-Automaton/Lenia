@@ -26,7 +26,6 @@ jobs:
       - name: Build each addon
         run: |
             npm install
-            done
         shell: bash
 
       - name: Upload build artifacts
