@@ -1,0 +1,40 @@
+
+name: Build All Addons
+
+
+on:
+  push:
+
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+
+      - name: Build each addon
+        run: |
+            npm install
+            done
+        shell: bash
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts-${{ runner.os }}
+          path: |
+            **/build/Release/*.node
+            **/build/Release/*.lib
+            **/build/Release/*.exp
+
