@@ -1,3 +1,4 @@
+
 name: Building
 
 on:
@@ -33,14 +34,14 @@ jobs:
         uses: thedoctor0/zip-release@0.7.5
         with:
           type: "zip"
-          directory: /build/Release
+          directory: build/Release/
           filename: ${{github.event.repository.name}}.zip
 
       - name: Publish & upload artifact
         uses: nanoufo/action-upload-artifacts-and-release-assets@v2
         with:
           path: |
-            ${{github.event.repository.name}}.zip
+            **/build/Release/${{github.event.repository.name}}.zip
           if-no-files-found: warn
           upload-release-files: true
           release-upload-url: ${{github.event.release.upload_url}}
