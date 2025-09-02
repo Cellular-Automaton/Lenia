@@ -1,13 +1,14 @@
-
-name: Build All Addons
-
+name: Building
 
 on:
-  push:
+  release:
+    types: [published]
+permissions:
+  contents: write
 
 
 jobs:
-  build:
+  release:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
@@ -16,24 +17,32 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '22'
 
-      - name: Build each addon
+      - name: Build addon
         run: |
-            npm install
+          npm install
         shell: bash
 
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
+      - name: Compress File
+        uses: thedoctor0/zip-release@0.7.5
         with:
-          name: build-artifacts-${{ runner.os }}
+          type: "zip"
+          directory: /build/Release
+          filename: ${{github.event.repository.name}}.zip
+
+      - name: Publish & upload artifact
+        uses: nanoufo/action-upload-artifacts-and-release-assets@v2
+        with:
           path: |
-            **/build/Release/*.node
-            **/build/Release/*.lib
-            **/build/Release/*.exp
+            ${{github.event.repository.name}}.zip
+          if-no-files-found: warn
+          upload-release-files: true
+          release-upload-url: ${{github.event.release.upload_url}}
+
 
