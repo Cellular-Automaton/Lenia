@@ -363,7 +363,7 @@ void PLC::Lenia::run()
     std::vector<std::vector<double>> u = this->calculate();
     std::vector<std::vector<double>> growth = this->growthLenia(u);
     for (size_t i = 0; i < new_tab.size(); ++i) {
-        for (size_t j = 0; j < new_tab[j].size(); ++j) {
+        for (size_t j = 0; j < new_tab[i].size(); ++j) {
             new_tab[i][j] += this->time * growth[i][j];
             if (new_tab[i][j] < 0) {
                 new_tab[i][j] = 0;
