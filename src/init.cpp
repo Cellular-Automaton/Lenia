@@ -27,12 +27,13 @@ Napi::Float64Array Wrapper::add_wrapped_lenia(const Napi::CallbackInfo &info)
     Napi::Number six = info[5].As<Napi::Number>();
     Napi::Number seven = info[6].As<Napi::Number>();
     Napi::Number eight = info[7].As<Napi::Number>();
+    Napi::Number nine = info[8].As<Napi::Number>();
 
     Napi::Float64Array return_value = Napi::Float64Array::New(env, first.ByteLength() / 8);
 
     std::vector<double> val{Wrapper::simulate_lenia(
         first.Data(), second.Int32Value(), third.FloatValue(), fourth.FloatValue(),
-        fifth.FloatValue(), six.FloatValue(), seven.Int32Value(), eight.FloatValue())};
+        fifth.FloatValue(), six.FloatValue(), seven.FloatValue(), eight.Int32Value(), nine.Int32Value())};
     for (size_t i{0}; i < val.size(); i++)
         return_value.Set(i, val[i]);
     /*api::Array Napi::Array returnValue = Napi::Array::New(
@@ -65,10 +66,11 @@ Napi::Array Wrapper::add_get_params(const Napi::CallbackInfo &info)
      * */
 
     Napi::Env env = info.Env(); // check if arguments are integer only.
-    std::array<std::string, 8> tmp{"tab_init:Float64Array", "R:Number",
+    std::array<std::string, 9> tmp{"tab_init:Float64Array", "R:Number",
                                    "Kernel_mu:Number",      "Kernel_sigma:Number",
                                    "growth_mu:Number",      "growth_sigma:Number",
-                                   "width:Number",          "height:Number"};
+                                   "time:Number",          "width:Number",
+                                   "height:Number"};
     //    std::cout << sizeof(*tmp.data()) << '\n';
     Napi::Array return_value = Napi::Array::New(env, tmp.size());
     for (size_t i{0}; i < tmp.size(); i++)

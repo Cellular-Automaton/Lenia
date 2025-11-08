@@ -14,6 +14,6 @@ namespace Wrapper
 {
     std::vector<double> simulate_lenia(double *tab_init, int R, double kernel_mu,
                                        double kernel_sigma, double growth_mu, double growth_sigma,
-                                       int size_x, int size_y);
+                                       double time, int size_x, int size_y);
 
 } // namespace Wrapper
