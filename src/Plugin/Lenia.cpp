@@ -325,13 +325,13 @@ PLC::Lenia::Lenia(std::vector<std::vector<double>> tab_init)
 }
 
 PLC::Lenia::Lenia(std::vector<std::vector<double>> tab_init, int R, double kernel_mu,
-                  double kernel_sigma, double growth_mu, double growth_sigma)
+                  double kernel_sigma, double growth_mu, double growth_sigma, double time)
 {
     this->tab = std::move(tab_init);
     this->kernel = this->createKernel(R, kernel_mu, kernel_sigma);
     this->mu = growth_mu;
     this->sigma = growth_sigma;
-    this->time = 0.1;
+    this->time = time;
 }
 
 PLC::Lenia::Lenia(std::vector<std::vector<double>> tab_init,

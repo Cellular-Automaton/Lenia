@@ -8,7 +8,7 @@
 
 std::vector<double> Wrapper::simulate_lenia(double *tab_init_1D, int R, double kernel_mu,
                                             double kernel_sigma, double growth_mu,
-                                            double growth_sigma, int width, int height)
+                                            double growth_sigma, double time, int width, int height)
 {
     std::vector<std::vector<double>> tab_init_2d{};
     std::vector<double> return_value{};
@@ -22,7 +22,7 @@ std::vector<double> Wrapper::simulate_lenia(double *tab_init_1D, int R, double k
         tab_init_2d.emplace_back(tmp);
         tmp.clear();
     }
-    PLC::Lenia lenia{tab_init_2d, R, kernel_mu, kernel_sigma, growth_mu, growth_sigma};
+    PLC::Lenia lenia{tab_init_2d, R, kernel_mu, kernel_sigma, growth_mu, growth_sigma, time};
     std::vector<std::vector<double>> simult_result{lenia.activate(2)[1].getTab()};
     for (auto vec : simult_result) {
         for (size_t i{0}; i < vec.size(); i++)

@@ -13,7 +13,7 @@ namespace PLC
         public:
             Lenia();
             Lenia(std::vector<std::vector<double> > tab_init);
-            Lenia(std::vector<std::vector<double> > tab_init, int R, double kernel_mu, double kernel_sigma, double growth_mu, double growth_sigma);
+            Lenia(std::vector<std::vector<double> > tab_init, int R, double kernel_mu, double kernel_sigma, double growth_mu, double growth_sigma, double time);
             Lenia(std::vector<std::vector<double> > tab_init, std::vector<std::vector<double> > kernel_init, double time, double growth_mu, double growth_sigma);
             ~Lenia() = default;
 
